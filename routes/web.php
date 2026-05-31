@@ -15,7 +15,9 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home', [
+        'mapImageUrl' => asset('images/location.png')
+    ]);
 });
 
 Route::get('/dashboard', function () {
