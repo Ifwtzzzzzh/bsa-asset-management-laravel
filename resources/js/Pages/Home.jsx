@@ -710,7 +710,7 @@ const Home = ({ mapImageUrl }) => {
             </section>
 
             {/* FIXED SECTIONS: LOGO DI-PERBESAR (RESPONSIVE) & DIVIDER LINE DIHAPUS TOTAL */}
-            <section className="bg-white w-full overflow-hidden relative z-10 py-10 ">
+            <section className="bg-white w-full pb-24 overflow-hidden relative z-10 py-10">
                 <style
                     dangerouslySetInnerHTML={{
                         __html: `
