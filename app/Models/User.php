@@ -7,13 +7,14 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['branch_id','name', 'role', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
@@ -22,11 +23,26 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function branch(): BelongsTo {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function tasks(): HasMany {
+        return $this->hasMany(Task::class);
+    }
+
+    public function facilityReports(): HasMany {
+        return $this->hasMany(FacilityReport::class);
+    }
+
+    public function stockOpnames(): HasMany {
+        return $this->hasMany(StockOpname::class);
     }
 }
