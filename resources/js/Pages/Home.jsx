@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Head, Link } from "@inertiajs/react";
 
-// Komponen Animasi Transisi Kurva Halus
 const ScrollReveal = ({ children, className = "" }) => {
     const [isVisible, setIsVisible] = useState(false);
     const domRef = useRef();
@@ -95,13 +94,10 @@ const CounterUp = ({ target, duration = 2000, suffix = "" }) => {
     );
 };
 
-// Menangkap prop mapImageUrl yang dikirim dari Laravel
 const Home = ({ mapImageUrl }) => {
     const [openFaq, setOpenFaq] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeLocation, setActiveLocation] = useState(null);
-
-    // Kecepatan putar otomatis marquee partner
     const marqueeSpeed = "100s";
 
     const faqs = [
@@ -146,7 +142,6 @@ const Home = ({ mapImageUrl }) => {
         },
     ];
 
-    // Posisi hitbox transparan mengunci titik merah di peta (image_8ad2b9.jpg)
     const locations = [
         {
             name: "Belawan",
@@ -221,7 +216,6 @@ const Home = ({ mapImageUrl }) => {
         },
     ];
 
-    // Otomatis generate path array dari brand_1.png sampai brand_29.png
     const brandLogos = Array.from(
         { length: 29 },
         (_, i) => `/images/brand_${i + 1}.png`,
@@ -229,7 +223,58 @@ const Home = ({ mapImageUrl }) => {
 
     return (
         <div className="bg-slate-50 text-slate-800 min-h-screen scroll-smooth selection:bg-red-600 selection:text-white relative font-sans antialiased">
-            <Head title="BSA Logistics Indonesia - Comprehensive & Integrated Logistics" />
+            {/* 🚀 UPGRADE SEO LAYER DI DALAM HEAD COMPONENT */}
+            <Head>
+                <title>
+                    BSA Logistics Indonesia - Smart End-to-End Logistics
+                    Solution
+                </title>
+                <meta
+                    name="description"
+                    content="PT BSA Logistics Indonesia Tbk menyediakan solusi rantai pasok terintegrasi: Smart Warehouse, Multimodal Forwarding, Nationwide Trucking, dan Inland Container Depot di seluruh Indonesia."
+                />
+                <meta
+                    name="keywords"
+                    content="BSA Logistics, logistik Indonesia, smart warehouse, pusat logistik berikat, trucking domestik, inland container depot, bsa logistics indonesia tbk, tracking kontainer"
+                />
+                <meta name="robots" content="index, follow" />
+                <link rel="canonical" href="https://bsalogistics.co.id" />
+
+                {/* Open Graph / Facebook / LinkedIn / WhatsApp */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://bsalogistics.co.id" />
+                <meta
+                    property="og:title"
+                    content="BSA Logistics Indonesia - Smart End-to-End Logistics Solution"
+                />
+                <meta
+                    property="og:description"
+                    content="Mendorong transparansi rantai pasok dengan jaringan luas, pergudangan berikat cerdas, dan armada transportasi nasional terintegrasi."
+                />
+                <meta
+                    property="og:image"
+                    content="https://bsalogistics.co.id/images/og-share-image.jpg"
+                />
+
+                {/* Twitter Cards */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta
+                    property="twitter:url"
+                    content="https://bsalogistics.co.id"
+                />
+                <meta
+                    property="twitter:title"
+                    content="BSA Logistics Indonesia - Smart End-to-End Logistics Solution"
+                />
+                <meta
+                    property="twitter:description"
+                    content="Solusi logistik end-to-end terpercaya dengan kapasitas gudang 150.000 m² dan live tracking armada."
+                />
+                <meta
+                    property="twitter:image"
+                    content="https://bsalogistics.co.id/images/og-share-image.jpg"
+                />
+            </Head>
 
             {/* FIXED RESPONSIVE NAVBAR LAYER */}
             <nav className="bg-white/90 backdrop-blur-md fixed top-0 left-0 right-0 z-50 border-b border-slate-100 shadow-sm transition-all duration-300">
@@ -322,11 +367,7 @@ const Home = ({ mapImageUrl }) => {
                 </div>
 
                 <div
-                    className={`lg:hidden absolute top-20 left-0 right-0 bg-white border-b border-slate-100 shadow-xl transition-all duration-300 ease-in-out origin-top z-40 ${
-                        isMenuOpen
-                            ? "opacity-100 scale-y-100 visible h-auto max-h-[450px]"
-                            : "opacity-0 scale-y-0 invisible max-h-0 overflow-hidden"
-                    }`}
+                    className={`lg:hidden absolute top-20 left-0 right-0 bg-white border-b border-slate-100 shadow-xl transition-all duration-300 ease-in-out origin-top z-40 ${isMenuOpen ? "opacity-100 scale-y-100 visible h-auto max-h-[450px]" : "opacity-0 scale-y-0 invisible max-h-0 overflow-hidden"}`}
                 >
                     <div className="px-4 pt-2 pb-6 space-y-1 flex flex-col font-semibold text-slate-700 text-sm">
                         <a
@@ -530,7 +571,7 @@ const Home = ({ mapImageUrl }) => {
                 </div>
             </section>
 
-            {/* SECTION 3: NETWORK OPERASIONAL - INTERACTIVE OVERLAY MAP LAYER */}
+            {/* SECTION 3: NETWORK OPERASIONAL */}
             <section
                 id="network"
                 className="py-20 lg:py-24 bg-white scroll-mt-24"
@@ -538,10 +579,10 @@ const Home = ({ mapImageUrl }) => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-10">
                     <div className="text-center space-y-2 max-w-2xl mx-auto">
                         <p className="text-xs font-bold uppercase tracking-widest text-red-600">
-                            Jaringan Strategis Nusantara
+                            Nusantara Strategic Network
                         </p>
                         <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                            Jaringan Lokasi Operasional
+                            Operational Location Network
                         </h2>
                         <p className="text-slate-500 text-xs sm:text-sm">
                             Infrastruktur logistik terintegrasi di titik-titik
@@ -709,7 +750,7 @@ const Home = ({ mapImageUrl }) => {
                 </div>
             </section>
 
-            {/* FIXED SECTIONS: LOGO DI-PERBESAR (RESPONSIVE) & DIVIDER LINE DIHAPUS TOTAL */}
+            {/* SECTION: BRAND LOGO SLIDER */}
             <section className="bg-white w-full pb-24 overflow-hidden relative z-10 py-10">
                 <style
                     dangerouslySetInnerHTML={{
@@ -734,9 +775,7 @@ const Home = ({ mapImageUrl }) => {
                     <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-white via-white/70 to-transparent z-20 pointer-events-none"></div>
                     <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-white via-white/70 to-transparent z-20 pointer-events-none"></div>
 
-                    {/* Content Layer Infinite Loop Slider */}
                     <div className="animate-marquee-brands flex items-center gap-16 md:gap-24">
-                        {/* Loop 1: Ukuran box pembungkus dinaikkan agar leluasa di layar desktop/tablet */}
                         {brandLogos.map((src, index) => (
                             <div
                                 key={`brand-1-${index}`}
@@ -752,7 +791,6 @@ const Home = ({ mapImageUrl }) => {
                                 />
                             </div>
                         ))}
-                        {/* Loop 2 */}
                         {brandLogos.map((src, index) => (
                             <div
                                 key={`brand-2-${index}`}

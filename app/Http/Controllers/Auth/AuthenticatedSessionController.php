@@ -25,18 +25,26 @@ class AuthenticatedSessionController extends Controller {
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse {
+    public function store(LoginRequest $request): \Illuminate\Http\JsonResponse {
         $request->authenticate();
         $request->session()->regenerate();
         $user = Auth::user();
 
-        if (in_array($user->role, ['admin', 'supervisor'])) {
-            return redirect()->intended('/admin');
-        }
-        if ($user->role === 'client') {
-            return redirect()->intended(route('client.dashboard', absolute: false));
-        }
-        return redirect()->intended(route('portal.dashboard', absolute: false));
+        return response()->json([
+            'success' => true,
+            'role' => $user->role,
+        ]);
+
+        // if ($user->role === 'admin') {
+        //     return redirect()->away(url('/admin'));
+        // }
+        // if ($user->role === 'supervisor') {
+        //     return redirect()->away(url('/supervisor'));
+        // }
+        // if ($user->role === 'client') {
+        //     return redirect()->intended(route('client.dashboard', absolute: false));
+        // }
+        // return redirect()->intended(route('dashboard', absolute: true));
     }
 
     /**

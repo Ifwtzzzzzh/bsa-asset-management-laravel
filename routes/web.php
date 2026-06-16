@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,9 +22,17 @@ Route::get('/home', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        $user = Auth::user();
+        if ($user->role === 'admin') return redirect('/admin');
+        if ($user->role === 'supervisor') return redirect('/supervisor');
+        return redirect('/portal/dashboard');
+    })->name('dashboard');
+
     Route::get('/portal/dashboard', function () {
         return Inertia::render('Portal/Dashboard');
     })->name('portal.dashboard');
+
     Route::get('/client/dashboard', function () {
         return Inertia::render('Client/Dashboard');
     })->name('client.dashboard');

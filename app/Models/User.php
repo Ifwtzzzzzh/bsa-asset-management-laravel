@@ -32,7 +32,14 @@ class User extends Authenticatable {
     }
 
     public function canAccessPanel(Panel $panel): bool {
-        return in_array($this->role, ['admin', 'supervisor']);
+        $panelId = $panel->getId();
+        if ($panelId === 'admin') {
+            return $this->role === 'admin';
+        }
+        if ($panelId === 'supervisor') {
+            return $this->role === 'supervisor';
+        }
+        return false;
     }
 
     public function branch(): BelongsTo {
