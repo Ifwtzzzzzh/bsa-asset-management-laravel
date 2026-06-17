@@ -15,4 +15,18 @@ class Task extends Model {
     public function asset(): BelongsTo {
         return $this->belongsTo(Asset::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($task) {
+            if ($task->status === 'in_progress' && $task->type === 'repair') {
+                $task->asset->update(['status' => 'maintenance']);
+            }
+            elseif ($task->status === 'completed' && $task->type === 'repair') {
+                $task->asset->update(['status' => 'available']);
+            }
+        });
+    }
 }

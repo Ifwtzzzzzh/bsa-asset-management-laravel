@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\FacilityReports\Tables;
+namespace App\Filament\Resources\Tasks\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -10,43 +10,49 @@ use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class FacilityReportsTable
+class TasksTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
                 TextColumn::make('asset.name')
-                    ->label('Asset Name')
+                    ->label('Asset Unit')
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
                 TextColumn::make('user.name')
-                    ->label('Dilaporkan Oleh')
+                    ->label('Eksekutor')
                     ->searchable(),
 
-                TextColumn::make('rating')
-                    ->label('Rating')
-                    ->sortable()
-                    ->formatStateUsing(fn ($state) => str_repeat('⭐', $state)),
+                TextColumn::make('type')
+                    ->label('Type')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->color(fn (string $state): string => match (strtolower($state)) {
+                        'maintenance' => 'info',
+                        'repair' => 'danger',
+                        'inspection' => 'warning',
+                        default => 'gray',
+                    }),
 
-                TextColumn::make('notes')
-                    ->label('Notes')
+                TextColumn::make('description')
+                    ->label('Instruksi')
                     ->limit(40)
                     ->searchable(),
 
                 TextColumn::make('status')
-                    ->label('Status')
+                    ->label('Status Progres')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->formatStateUsing(fn (string $state): string => ucwords(str_replace('_', ' ', $state)))
                     ->color(fn (string $state): string => match (strtolower($state)) {
                         'pending' => 'gray',
-                        'approved' => 'info',
-                        'rejected' => 'danger',
-                        'resolved' => 'success',
+                        'in_progress' => 'warning',
+                        'completed' => 'success',
                         default => 'gray',
-                    }),
+                }),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -58,11 +64,11 @@ class FacilityReportsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
-                    ViewAction::make(),
-                    EditAction::make(),
-                    DeleteAction::make(),
-                ])
-            ->toolbarActions([
+                ViewAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),

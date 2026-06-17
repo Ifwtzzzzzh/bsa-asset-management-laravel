@@ -33,21 +33,21 @@ class FacilityReportForm
                         4 => '⭐⭐⭐⭐ (Ringan)',
                         5 => '⭐⭐⭐⭐⭐ (Normal / Aman)',
                     ])
-                    ->required() // 🔥 SINKRON: Wajib required sesuai tinyInteger di DB lo
+                    ->required()
                     ->default(3)
                     ->helperText('Berikan rating skala kerusakan unit fisik saat ini.'),
 
                 Textarea::make('notes')
                     ->label('Deskripsi Catatan Kerusakan / Notes')
-                    ->required() // 🔥 SINKRON: Wajib required sesuai teks di DB lo
+                    ->required()
                     ->placeholder('Contoh: Ban bagian belakang kiri bocor parah dan pelek sedikit penyok akibat menghantam separator di Gudang Tanjung Priok...')
                     ->helperText('Wajib diisi. Tuliskan kronologi detail kerusakan atau catatan penanganan di sini.'),
 
                 FileUpload::make('photo_path')
                     ->label('Bukti Foto Kerusakan')
-                    ->image() // Memastikan yang diupload hanya file gambar
-                    ->directory('facility-reports') // Otomatis disimpan ke folder storage/app/public/facility-reports
-                    ->required() // 🔥 SINKRON: Kolom string foto wajib diisi di DB lo
+                    ->image()
+                    ->directory('facility-reports')
+                    ->required()
                     ->helperText('Wajib melampirkan foto kondisi fisik aset yang bermasalah sebagai bukti audit HO.'),
 
                 Select::make('status')
@@ -62,7 +62,6 @@ class FacilityReportForm
                     ->default('pending')
                     ->helperText('Status alur kerja verifikasi laporan operasional.'),
 
-                // Menangkap otomatis ID User / Supervisor yang sedang login secara background
                 Select::make('user_id')
                     ->label('Pelapor / Supervisor')
                     ->relationship('user', 'name')
