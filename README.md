@@ -1,9 +1,8 @@
 # BSA - Asset Management
 
 <aside>
-💡
 
-Using NodeJS v24.16 and PHP 8.4.1
+💡Using NodeJS v24.16 and PHP 8.4.1
 
 </aside>
 
