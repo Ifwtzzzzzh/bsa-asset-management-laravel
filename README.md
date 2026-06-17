@@ -1,58 +1,168 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BSA - Asset Management
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<aside>
+💡
 
-## About Laravel
+Using NodeJS v24.16 and PHP 8.4.1
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+</aside>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Tech Stacks & Packages
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Core Tech Stacks
 
-## Learning Laravel
+- **PHP 8.4+** (Back-End Language)
+- **Laravel 13** (Robust Back-End Framework)
+- **React JS** (Front-End Library untuk Operational Portal)
+- **Inertia JS** (The Bridge — Menghubungkan Laravel Controller dengan Komponen React secara Monolith)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Packages
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Laravel Breeze** (Package untuk scaffolding autentikasi React + Inertia bagi staff lapangan)
+- **Filament PHP v3** (Package Core untuk membangun Dashboard Admin & Invoicing Management super cepat)
+- **Filament Notifications** (Bawaan/Package Filament untuk kirim alert *real-time* ke dashboard Admin)
+- **Filament Rating Star** (Package Filament untuk menampilkan visualisasi rating kondisi fasilitas/aset dari lapangan)
+- **Laravel Notify** (Package untuk memunculkan notifikasi *flash/toast* yang estetik di sisi UI React)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+# Features
 
-## Agentic Development
+**Admin**
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Authentication & Role Scope
+- CMS (Content Management System)
+- B2B Invoicing & Term of Payment
+- Stock Opname Approval
+- Smart Monitoring
 
-```bash
-composer require laravel/boost --dev
+FrontEnd
 
-php artisan boost:install
+- Authentication
+- Inbound Receiving Scanner
+- Task Execution
+- Field Stock Opname
+- Facility Feedback & Rating
+
+# Entity Relationship Diagram (ERD)
+
+!Shamo Ecommerce-19.png
+
+# Unified Modeling Language (UML)
+
+!Usecase Diagram.png
+
+!Activity Diagram Modul Inbound.png
+
+# Technical Documentation
+
+### Setup Laravel
+
+```html
+composer create-project laravel/laravel bsa-asset-management
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Setup Laravel Breeze
 
-## Contributing
+```html
+composer require laravel/breeze --dev
+npm install --legacy-peer-deps
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && 
+npm run dev
+```
 
-## Code of Conduct
+### Setup Filament
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```html
+composer require filament/filament:"^5.0"
 
-## Security Vulnerabilities
+php artisan filament:install --panels
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Setup Laravel Notifiy
 
-## License
+```html
+composer require mckenziearts/laravel-notify
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+php artisan vendor:publish --provider="Mckenziearts\LaravelNotify\LaravelNotifyServiceProvider"
+```
+
+### Setup Filament Star Rating
+
+```html
+composer require l3aro/rating-star-for-filament
+
+php artisan vendor:publish --tag="filament-rating-star-config"
+```
+
+### Setup Tailwind CSS
+
+```html
+npm install tailwindcss @tailwindcss/vite
+```
+
+### Setup Model
+
+```html
+php artisan make:model Branch
+php artisan make:model User
+php artisan make:model AssetCategory
+php artisan make:model Asset
+php artisan make:model Inventory
+php artisan make:model Task
+php artisan make:model FacilityReport
+php artisan make:model StockOpname
+php artisan make:model Client
+php artisan make:model Invoice
+php artisan make:model InboundReceipt
+php artisan make:model InboundItem
+```
+
+### Setup Migrations
+
+```html
+php artisan make:migration create_branches_table
+php artisan make:migration create_asset_categories_table
+php artisan make:migration create_clients_table
+php artisan make:migration create_assets_table
+php artisan make:migration create_invoices_table
+php artisan make:migration create_inbound_receipts_table
+php artisan make:migration create_inventories_table
+php artisan make:migration create_tasks_table
+php artisan make:migration create_facility_reports_table
+php artisan make:migration create_stock_opnames_table
+php artisan make:migration create_inbound_items_table
+```
+
+### Setup Seeders
+
+```html
+php artisan make:seeder BranchSeeder
+php artisan make:seeder UserSeeder
+php artisan make:seeder AssetSeeder
+php artisan make:seeder FacilityReportSeeder
+php artisan make:seeder TaskSeeder
+
+php artisan db:seed --class=AssetSeeder
+```
+
+### Setup Controller and Middleware
+
+```html
+php artisan make:controller AssetController --api
+php artisan make:middleware CheckRole
+```
+
+### Setup Asset Resource Filament
+
+```html
+php artisan make:filament-resource Asset
+php artisan filament:install --panels
+
+php artisan make:filament-resource Branch --generate
+php artisan make:filament-resource User --generate
+php artisan make:filament-resource FacilityReport --generate
+php artisan make:filament-resource Task --generate
+
+php artisan make:filament-widget TaskStatusChart --chart
+php artisan make:filament-widget StatsOverview --stats-overview
+```
